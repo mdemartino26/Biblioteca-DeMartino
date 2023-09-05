@@ -1,11 +1,33 @@
+body {
+  min-height: 100vh;
+}
+
 header {
-  background-color: black;
+  background-color: #011627;
   color: white;
+}
+
+#cabeza {
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+#banner-pedidos {
+  width: 100%;
+  color: white;
+  background-color: #e76f51;
+  text-align: center;
 }
 
 main {
   width: 80%;
   margin: 0 auto;
+}
+
+h1 {
+  padding: 4%;
 }
 
 .populares {
@@ -14,7 +36,34 @@ main {
   justify-content: space-around;
 }
 
+#columna {
+  width: 70%;
+  min-width: 70%;
+}
+
+#col-peque {
+  width: 25%;
+  background-color: #faedcd;
+  padding-top: 4%;
+}
+
+.libro:hover {
+  background-color: #faedcd !important;
+}
+
+.selecc {
+  display: flex;
+  justify-content: center;
+}
+
+.valores {
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
 footer {
   background-color: black;
   color: white;
+  height: 5vh;
+  text-align: center;
 }

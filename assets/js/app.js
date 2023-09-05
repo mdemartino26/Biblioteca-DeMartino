@@ -8,7 +8,7 @@ function agregar(precio) {
   carrito.innerHTML = contador;
   total = total + precio;
   let precioFinal = document.getElementById("valor_total");
-  precioFinal.innerHTML = total;
+  precioFinal.innerHTML = "$" + total;
 }
 
 function envio() {
@@ -21,7 +21,7 @@ function envio() {
         alert("El envío cuesta $100.");
         total += 100;
         let precioFinal = document.getElementById("valor_total");
-        precioFinal.innerHTML = total;
+        precioFinal.innerHTML = "$" + total;
         document.getElementById("botonEnvio").disabled = true;
         document.getElementById("botonPagar").disabled = false;
       } else {
