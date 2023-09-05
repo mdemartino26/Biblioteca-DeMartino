@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+    <script src="assets/js/app.js"></script>
+  </head>
+  <body>
+    <header>
+      <h2>Biblioteca</h2>
+    </header>
+    <main>
+      <section>
+        <h1>populares</h1>
+        <div class="populares">
+          <div class="card" style="width: 18rem">
+            <img src="assets/img/libros.jpeg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Mujercitas</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <p class="card-text">precio: $11000</p>
+              <button class="pedido" onclick="agregar(11000)">
+                Pedir libro
+              </button>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem">
+            <img src="assets/img/libros.jpeg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Hamlet</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <p class="card-text">precio: $10000</p>
+              <button class="pedido" onclick="agregar(10000)">
+                Pedir libro
+              </button>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem">
+            <img src="assets/img/libros.jpeg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Cumbres Borrascosas</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <p class="card-text">precio: $8000</p>
+              <button class="pedido" onclick="agregar(8000)">
+                Pedir libro
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="seleccionados">
+        <h3>Carrito:</h3>
+        <p id="libros_seleccionados"></p>
+        <h3>Total:</h3>
+        <p id="valor_total"></p>
+      </section>
+
+      <div>
+        <button id="botonEnvio" onclick="envio()">Calcular envío</button>
+      </div>
+      <div>
+        <button id="botonPagar" onclick="pagar()" disabled>pagar</button>
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+header {
+  background-color: black;
+  color: white;
+}
+
+main {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.populares {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+footer {
+  background-color: black;
+  color: white;
+}
