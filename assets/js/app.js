@@ -2,7 +2,6 @@ let contador = 0;
 let total = 0;
 
 function agregar(precio) {
-  alert("agregaste un libro");
   contador++;
   let carrito = document.getElementById("libros_seleccionados");
   carrito.innerHTML = contador;
@@ -39,16 +38,10 @@ function pagar() {
   switch (metodoPago) {
     case "1":
       const cuotas = prompt(
-        "selecciona cantidad de pagos:  1. 1 cuota  2. 3 cuotas 3. 6 cuotas"
+        "selecciona cantidad de cuotas:",
+        "1 cuota, 3 cuotas, 6 cuotas"
       );
       switch (cuotas) {
-        case "1":
-          alert("Una cuota de $" + total);
-          alert(
-            "su compra llegará en los proximos 10 días hábiles. Muchas gracias por comprar con nosotros!"
-          );
-          location.reload();
-          break;
         case "1 cuota":
           alert("Una cuota de $" + total);
           alert(
@@ -56,22 +49,8 @@ function pagar() {
           );
           location.reload();
           break;
-        case "2":
-          alert("Tres cuotas de $" + total / 3);
-          alert(
-            "su compra llegará en los proximos 10 días hábiles. Muchas gracias por comprar con nosotros!"
-          );
-          location.reload();
-          break;
         case "3 cuotas":
           alert("Tres cuotas $" + total / 3);
-          alert(
-            "su compra llegará en los proximos 10 días hábiles. Muchas gracias por comprar con nosotros!"
-          );
-          location.reload();
-          break;
-        case "3":
-          alert("Seis cuotas $" + total / 6);
           alert(
             "su compra llegará en los proximos 10 días hábiles. Muchas gracias por comprar con nosotros!"
           );
