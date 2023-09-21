@@ -1,6 +1,7 @@
 let contador = 0;
 let total = 0;
 
+//Array de libros
 const products = [
   {
     nombre: "Mujercitas",
@@ -34,7 +35,7 @@ const products = [
   },
 ];
 
-// Función para crear una tarjeta Bootstrap
+// Función para crear las tarjetas de los libros
 function createCard(product) {
   const card = document.createElement("div");
   card.className = "col-md-4 mt-4";
@@ -78,6 +79,7 @@ function buyProduct(productName, productPrecio) {
 // Mostrar las tarjetas en la carga inicial
 displayProducts();
 
+//funcion que calcula si el envío se cobra o no
 function envio(productName) {
   switch (contador) {
     case 0:
@@ -99,6 +101,7 @@ function envio(productName) {
   }
 }
 
+//funcion con los alerts de pago simulados
 function pagar() {
   const metodoPago = prompt(
     "selecciona un metodo de pago:  1.credito  2. debito "
@@ -144,28 +147,33 @@ function pagar() {
   }
 }
 
+//funcion que filtra los productos por precio maximo, reemplaza el conteiner de libros por los resultados
 function filtrarProductos() {
-  const precioMax =
-    parseFloat(document.getElementById("precioMax").value) || Number.MAX_VALUE;
+  document.getElementById("verResultados").className = "resultados";
 
+  const precioMax =
+    parseFloat(document.getElementById("precioMax").value) || Number.MAX_VALUE; //convierte el valor a decimal o toma el valor maximo posible
   const productosFiltrados = products.filter((producto) => {
-    const precioProducto = producto.precio;
-    return precioProducto <= precioMax;
+    const precioProducto = producto.precio; //Busca el precio del producto y lo crea en una const
+    return precioProducto <= precioMax; // devuelve el producto que sea menos al precio max
   });
 
   mostrarResultados(productosFiltrados);
 }
 
+//funcion que muestra los resultados en el container
 function mostrarResultados(productos) {
-  const resultadosDiv = document.getElementById("resultados");
+  const resultadosDiv = document.getElementById("verResultados");
   resultadosDiv.innerHTML = "";
   document.getElementById("productContainer").style.display = "none";
+
+  //si se ingresa un valor y no encuentra productos que valgan menos que el precio ingresado
   if (productos.length === 0) {
-    resultadosDiv.innerHTML =
-      "<p>No se encontraron productos que coincidan con los filtros.</p>";
+    resultadosDiv.innerHTML = "<p>No se encontró un libro más barato.</p>";
     return;
   }
 
+  //
   productos.forEach((producto) => {
     const productoDiv = document.createElement("div");
     productoDiv.classList.add("card", "mb-2");

@@ -7,11 +7,17 @@ header {
   color: white;
 }
 
-#cabeza {
+#nextTo {
+  display: flex;
   width: 80%;
   margin: 0 auto;
   padding-top: 2%;
   padding-bottom: 2%;
+  justify-content: space-between;
+}
+
+.form-inline {
+  display: flex;
 }
 
 #banner-pedidos {
@@ -30,10 +36,12 @@ h1 {
   padding: 4%;
 }
 
-.populares {
+#productContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  width: 70%;
+  margin-bottom: 2%;
 }
 
 .container {
@@ -58,16 +66,25 @@ h1 {
   margin-left: 1%;
 }
 
-#resultados {
+.resultadosInicial {
+  display: none;
+}
+
+.resultados {
   display: flex;
-  width: 100%;
+  width: 70%;
   margin: 0 auto;
   justify-content: space-evenly;
   flex-flow: wrap;
+  margin-bottom: 2%;
 }
 
-.libro:hover {
+.card:hover {
   background-color: #faedcd !important;
+}
+
+#seleccionados {
+  text-align: center;
 }
 
 .selecc {
