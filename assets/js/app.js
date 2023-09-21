@@ -2,7 +2,7 @@ let contador = 0;
 let total = 0;
 
 //Array de libros
-const products = [
+const libros = [
   {
     nombre: "Mujercitas",
     precio: 10000,
@@ -40,13 +40,14 @@ function createCard(product) {
   const card = document.createElement("div");
   card.className = "col-md-4 mt-4";
 
+  //crea la card
   card.innerHTML = `
     <div class="card">
       <img src="${product.foto}" class="card-img-top" alt="..."> 
       <div class="card-body">
         <h5 class="card-title">${product.nombre}</h5>
         <p class="card-text">Precio: ${product.precio}</p>
-        <button class="btn btn-primary" onclick="buyProduct('${product.nombre}', ${product.precio})">Comprar</button>
+        <button class="btn btn-primary" onclick="comprarProducto('${product.nombre}', ${product.precio})">Comprar</button>
       </div>
     </div>
   `;
@@ -55,19 +56,18 @@ function createCard(product) {
 }
 
 // Función para agregar las tarjetas al contenedor en el HTML
-function displayProducts() {
+function mostrarProductos() {
   const productContainer = document.getElementById("productContainer");
   productContainer.innerHTML = "";
 
-  for (const product of products) {
-    const card = createCard(product);
+  for (const producto of libros) {
+    const card = createCard(producto);
     productContainer.appendChild(card);
   }
 }
 
 // Función que se ejecuta al hacer clic en el botón "Comprar"
-function buyProduct(productName, productPrecio) {
-  alert(`Has comprado ${productName} con un valor de ${productPrecio}`);
+function comprarProducto(productName, productPrecio) {
   contador++;
   let carrito = document.getElementById("libros_seleccionados");
   carrito.innerHTML = contador;
@@ -77,7 +77,7 @@ function buyProduct(productName, productPrecio) {
 }
 
 // Mostrar las tarjetas en la carga inicial
-displayProducts();
+mostrarProductos();
 
 //funcion que calcula si el envío se cobra o no
 function envio(productName) {
@@ -153,7 +153,7 @@ function filtrarProductos() {
 
   const precioMax =
     parseFloat(document.getElementById("precioMax").value) || Number.MAX_VALUE; //convierte el valor a decimal o toma el valor maximo posible
-  const productosFiltrados = products.filter((producto) => {
+  const productosFiltrados = libros.filter((producto) => {
     const precioProducto = producto.precio; //Busca el precio del producto y lo crea en una const
     return precioProducto <= precioMax; // devuelve el producto que sea menos al precio max
   });
