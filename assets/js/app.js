@@ -159,7 +159,7 @@ function filtrarProductos() {
 function mostrarResultados(productos) {
   const resultadosDiv = document.getElementById("resultados");
   resultadosDiv.innerHTML = "";
-
+  document.getElementById("productContainer").style.display = "none";
   if (productos.length === 0) {
     resultadosDiv.innerHTML =
       "<p>No se encontraron productos que coincidan con los filtros.</p>";
@@ -170,11 +170,14 @@ function mostrarResultados(productos) {
     const productoDiv = document.createElement("div");
     productoDiv.classList.add("card", "mb-2");
     productoDiv.innerHTML = `
+      <img src="${producto.foto}" class="card-img-top" alt="..."> 
       <div class="card-body">
         <h5 class="card-title">${producto.nombre}</h5>
-        <p class="card-text">Precio: $${producto.precio}</p>
+        <p class="card-text">Precio: ${producto.precio}</p>
+        <button class="btn btn-primary" onclick="buyProduct('${producto.nombre}', ${producto.precio})">Comprar</button>
       </div>
-    `;
+    </div>
+  `;
     resultadosDiv.appendChild(productoDiv);
   });
 }
