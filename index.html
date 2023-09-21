@@ -11,7 +11,6 @@
       crossorigin="anonymous"
     />
     <title>Biblioteca</title>
-    <script src="assets/js/app.js"></script>
   </head>
   <body>
     <!--//////////////////               HEADER                   //////////////////-->
@@ -27,77 +26,14 @@
     <!--//////////////////               MAIN                   //////////////////-->
     <main>
       <div class="container text-center">
-        <div class="row">
+        <section id="cardsLibros">
+
+          <h1>Populares</h1>
+        <div class="row" id="productContainer">  
           <div class="col" id="columna">
-            <section>
-              <h1>Populares</h1>
-              <div class="populares">
-                <div
-                  class="card shadow p-3 mb-5 bg-body-tertiary rounded libro"
-                  style="width: 30%"
-                >
-                  <img
-                    src="assets/img/libros.jpeg"
-                    class="card-img-top"
-                    alt="..."
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Mujercitas</h5>
-
-                    <p class="card-text">precio: $11000</p>
-                    <button
-                      class="pedido btn btn-outline-primary"
-                      onclick="agregar(11000)"
-                    >
-                      Pedir libro
-                    </button>
-                  </div>
-                </div>
-                <div
-                  class="card shadow p-3 mb-5 bg-body-tertiary rounded libro"
-                  style="width: 30%"
-                >
-                  <img
-                    src="assets/img/libros.jpeg"
-                    class="card-img-top"
-                    alt="..."
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Hamlet</h5>
-
-                    <p class="card-text">precio: $10000</p>
-                    <button
-                      class="pedido btn btn-outline-primary"
-                      onclick="agregar(10000)"
-                    >
-                      Pedir libro
-                    </button>
-                  </div>
-                </div>
-                <div
-                  class="card shadow p-3 mb-5 bg-body-tertiary rounded libro"
-                  style="width: 30%"
-                >
-                  <img
-                    src="assets/img/libros.jpeg"
-                    class="card-img-top"
-                    alt="..."
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Cumbres Borrascosas</h5>
-
-                    <p class="card-text">precio: $8000</p>
-                    <button
-                      class="pedido btn btn-outline-primary"
-                      onclick="agregar(8000)"
-                    >
-                      Pedir libro
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </section>
           </div>
+          </div>
+        </section>
           <div class="col" id="col-peque">
             <section id="seleccionados">
               <div class="selecc">
@@ -108,7 +44,7 @@
                 <h3>Total:</h3>
                 <p id="valor_total" class="valores"></p>
               </div>
-            </section>
+        
 
             <div>
               <button
@@ -136,5 +72,6 @@
 
     <!--//////////////////               FOOTER                   //////////////////-->
     <footer>biblioteca</footer>
+    <script src="assets/js/app.js"></script>
   </body>
 </html>
