@@ -4,7 +4,7 @@ let total = 0;
 const products = [
   {
     nombre: "Mujercitas",
-    precio: 100000,
+    precio: 10000,
     foto: "assets/img/libros.jpeg",
   },
   {
@@ -18,18 +18,18 @@ const products = [
     foto: "assets/img/libros.jpeg",
   },
   {
-    nombre: "Producto 4",
-    precio: 8.99,
+    nombre: "Pet Sematary",
+    precio: 9000,
     foto: "assets/img/libros.jpeg",
   },
   {
-    nombre: "Producto 5",
-    precio: 12.0,
+    nombre: "Universo Marvel",
+    precio: 15000,
     foto: "assets/img/libros.jpeg",
   },
   {
-    nombre: "Producto 6",
-    precio: 18.25,
+    nombre: "Don Quojite",
+    precio: "20000",
     foto: "assets/img/libros.jpeg",
   },
 ];
@@ -41,11 +41,11 @@ function createCard(product) {
 
   card.innerHTML = `
     <div class="card">
-      <img src="assets/img/libros.jpeg" class="card-img-top" alt="..."> 
+      <img src="${product.foto}" class="card-img-top" alt="..."> 
       <div class="card-body">
         <h5 class="card-title">${product.nombre}</h5>
-        <p class="card-text">Precio: $${product.precio}</p>
-        <button class="btn btn-primary" onclick="buyProduct('${product.nombre}')">Comprar</button>
+        <p class="card-text">Precio: ${product.precio}</p>
+        <button class="btn btn-primary" onclick="buyProduct('${product.nombre}', ${product.precio})">Comprar</button>
       </div>
     </div>
   `;
@@ -65,23 +65,20 @@ function displayProducts() {
 }
 
 // Función que se ejecuta al hacer clic en el botón "Comprar"
-function buyProduct(productName) {
-  alert(`Has comprado ${productName}`);
+function buyProduct(productName, productPrecio) {
+  alert(`Has comprado ${productName} con un valor de ${productPrecio}`);
+  contador++;
+  let carrito = document.getElementById("libros_seleccionados");
+  carrito.innerHTML = contador;
+  total = total + productPrecio;
+  let precioFinal = document.getElementById("valor_total");
+  precioFinal.innerHTML = "$" + total;
 }
 
 // Mostrar las tarjetas en la carga inicial
 displayProducts();
 
-function agregar(precio) {
-  contador++;
-  let carrito = document.getElementById("libros_seleccionados");
-  carrito.innerHTML = contador;
-  total = total + precio;
-  let precioFinal = document.getElementById("valor_total");
-  precioFinal.innerHTML = "$" + total;
-}
-
-function envio() {
+function envio(productName) {
   switch (contador) {
     case 0:
       alert("Selecciona al menos un libro antes de continuar.");
