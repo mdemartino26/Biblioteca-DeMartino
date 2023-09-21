@@ -143,3 +143,38 @@ function pagar() {
       break;
   }
 }
+
+function filtrarProductos() {
+  const precioMax =
+    parseFloat(document.getElementById("precioMax").value) || Number.MAX_VALUE;
+
+  const productosFiltrados = products.filter((producto) => {
+    const precioProducto = producto.precio;
+    return precioProducto <= precioMax;
+  });
+
+  mostrarResultados(productosFiltrados);
+}
+
+function mostrarResultados(productos) {
+  const resultadosDiv = document.getElementById("resultados");
+  resultadosDiv.innerHTML = "";
+
+  if (productos.length === 0) {
+    resultadosDiv.innerHTML =
+      "<p>No se encontraron productos que coincidan con los filtros.</p>";
+    return;
+  }
+
+  productos.forEach((producto) => {
+    const productoDiv = document.createElement("div");
+    productoDiv.classList.add("card", "mb-2");
+    productoDiv.innerHTML = `
+      <div class="card-body">
+        <h5 class="card-title">${producto.nombre}</h5>
+        <p class="card-text">Precio: $${producto.precio}</p>
+      </div>
+    `;
+    resultadosDiv.appendChild(productoDiv);
+  });
+}
