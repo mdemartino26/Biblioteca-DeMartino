@@ -182,7 +182,7 @@ function mostrarResultados(productos) {
       <div class="card-body">
         <h5 class="card-title">${producto.nombre}</h5>
         <p class="card-text">Precio: ${producto.precio}</p>
-        <button class="btn btn-primary" onclick="buyProduct('${producto.nombre}', ${producto.precio})">Comprar</button>
+        <button class="btn btn-primary" onclick="comprarProducto('${producto.nombre}', ${producto.precio})">Comprar</button>
       </div>
     </div>
   `;
