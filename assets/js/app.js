@@ -1,7 +1,7 @@
 let contador = 0;
 let total = 0;
 
-//Array de libros
+//Array de libros (objetos)
 const libros = [
   {
     nombre: "Mujercitas",
