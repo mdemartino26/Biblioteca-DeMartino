@@ -66,7 +66,7 @@ function mostrarProductos() {
   }
 }
 
-// Función que se ejecuta al hacer clic en el botón "Comprar"
+// Función que se de Onclick boton
 function comprarProducto(productName, productPrecio) {
   contador++;
   let carrito = document.getElementById("libros_seleccionados");
@@ -80,7 +80,7 @@ function comprarProducto(productName, productPrecio) {
 mostrarProductos();
 
 //funcion que calcula si el envío se cobra o no
-function envio(productName) {
+function envio() {
   switch (contador) {
     case 0:
       alert("Selecciona al menos un libro antes de continuar.");
