@@ -23,7 +23,7 @@
       <div id="formFiltro">
         <form class="form-inline my-2 my-lg-0">
           <input id="precioMax" class="form-control mr-sm-2" type="number" placeholder="Precio máximo">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="filtrarProductos()">Buscar</button>
+          <button id="botonFiltrar" class="btn btn-outline-success my-2 my-sm-0" type="button">Buscar</button>
         </form>
       </div>
     </div>
@@ -40,7 +40,7 @@
 
 
         
-          <div class="container" id="container">
+        <div class="container" id="container">
             <div id="verResultados" class="mt-4 resultadosInicial"></div>
         <div class="row" id="productContainer">  
         
@@ -48,15 +48,80 @@
           <h1>Populares</h1>
           <div class="col" id="columna">
           </div>
-          </div>
-        </section>
+
+          
+        </div>
+        
+        <div class="col" id="pago">
+          <div id="valorEnvio"></div>
+
+          <h2>Método de pago:</h2>
+          <button
+          id="botonCredito"
+          class="btn btn-outline-success"
+        >
+          Credito
+        </button>
+        
+
+        <button
+        id="botonDebito"
+        class="btn btn-outline-success"
+      >
+        Debito
+      </button>
+
+      <div id="cuotas">
+          <h2>Seleccione la cantidad de cuotas:</h2>
+          <button
+          id="botonUna"
+          class="btn btn-outline-success"
+        >
+          1 Cuota
+        </button>
+        <button
+          id="botonTres"
+          class="btn btn-outline-success"
+        >
+          3 Cuotas
+        </button>
+        <button
+          id="botonSeis"
+          class="btn btn-outline-success"
+        >
+          6 Cuotas
+        </button>
+      </div>
+      <div id="valorCuota">
+      </div>
+      <button  id="pagar"
+       class="btn btn-outline-success">Pagar</button> 
+    </div>
+      <div id="llegara">
+        <p>Su compra llegará dentro de los próximos 10 días habiles. Muchas gracias por comprar con nosotros!</p>
+        <button
+        id="botonVolver"
+        class="btn btn-outline-success"
+      >
+        Volver al inicio
+      </button>
+
+      <button
+        id="botonVolver"
+        class="btn btn-outline-success"
+      >
+        Boton de arrepentimiento
+      </button>
+      </div>
+       
+        
     
 
           <div class="col" id="col-peque">
             <section id="seleccionados">
               <div class="selecc">
                 <h3>Carrito:</h3>
-                <p id="libros_seleccionados" class="valores"></p>
+                <p id="libros_seleccionados" class="valores"> </p>
               </div>
               <div class="selecc">
                 <h3>Total:</h3>
@@ -69,19 +134,17 @@
               <button
                 id="botonEnvio"
                 class="btn btn-outline-success"
-                onclick="envio()"
               >
                 Calcular envío
               </button>
             </div>
             <div>
+              
               <button
-                id="botonPagar"
-                class="btn btn-outline-success"
-                onclick="pagar()"
-                disabled
+                id="botonBorrar"
+                class="btn btn-outline-danger"
               >
-                pagar
+                Borrar Carrito
               </button>
             </div>
           </div>

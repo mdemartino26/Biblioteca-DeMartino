@@ -97,6 +97,22 @@ h1 {
   font-size: 1.5rem;
 }
 
+#pago {
+  display: none;
+}
+
+#cuotas {
+  display: none;
+}
+
+#llegara {
+  display: none;
+}
+
+#pagar {
+  display: none;
+}
+
 footer {
   background-color: black;
   color: white;

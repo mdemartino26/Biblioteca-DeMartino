@@ -1,5 +1,32 @@
-let contador = 0;
-let total = 0;
+let contador = parseInt(localStorage.getItem("contador")) || 0;
+let total = parseInt(localStorage.getItem("total")) || 0;
+
+const botonEnvio = document.querySelector("#botonEnvio");
+botonEnvio.addEventListener("click", envio);
+/* const botonPagar = document.querySelector("#botonPagar");
+botonPagar.addEventListener("click", pagar); */
+const botonFiltrar = document.querySelector("#botonFiltrar");
+botonFiltrar.addEventListener("click", filtrarProductos);
+const botonBorrar = document.querySelector("#botonBorrar");
+botonBorrar.addEventListener("click", borrarCarrito);
+const metodoCredito = document.querySelector("#botonCredito");
+metodoCredito.addEventListener("click", () => pagar(1));
+
+const metodoDebito = document.querySelector("#botonDebito");
+metodoDebito.addEventListener("click", () => pagar(2));
+
+const unaCuota = document.querySelector("#botonUna");
+unaCuota.addEventListener("click", () => dividir("1"));
+const tresCuotas = document.querySelector("#botonTres");
+tresCuotas.addEventListener("click", () => dividir("3"));
+const seisCuotas = document.querySelector("#botonSeis");
+seisCuotas.addEventListener("click", () => dividir("6"));
+
+const botonVolver = document.querySelector("#botonVolver");
+botonVolver.addEventListener("click", borrarSesion);
+
+const botonPagar = document.querySelector("#pagar");
+botonPagar.addEventListener("click", terminar);
 
 //Array de libros (objetos)
 const libros = [
@@ -35,6 +62,14 @@ const libros = [
   },
 ];
 
+//Muestra al abrir la ventana lo que hay en el localStorage
+window.onload = function () {
+  let carrito = document.querySelector("#libros_seleccionados");
+  carrito.innerHTML = contador;
+  let precioFinal = document.querySelector("#valor_total");
+  precioFinal.innerHTML = "$" + total;
+};
+
 // Función para crear las tarjetas de los libros
 function createCard(product) {
   const card = document.createElement("div");
@@ -66,14 +101,30 @@ function mostrarProductos() {
   }
 }
 
-// Función que se de Onclick boton
+//Funcion de compra
 function comprarProducto(productName, productPrecio) {
   contador++;
   let carrito = document.getElementById("libros_seleccionados");
   carrito.innerHTML = contador;
+
   total = total + productPrecio;
   let precioFinal = document.getElementById("valor_total");
   precioFinal.innerHTML = "$" + total;
+
+  // Guardar el contador en el Local Storage
+  localStorage.setItem("contador", JSON.stringify(contador));
+
+  //Guardar el total en el Local Storage
+  localStorage.setItem("total", JSON.stringify(total));
+
+  // Guardar el nombre del producto en el Local Storage
+  let productosEnCarrito =
+    JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
+  productosEnCarrito.push(productName);
+  localStorage.setItem(
+    "productosEnCarrito",
+    JSON.stringify(productosEnCarrito)
+  );
 }
 
 // Mostrar las tarjetas en la carga inicial
@@ -81,70 +132,70 @@ mostrarProductos();
 
 //funcion que calcula si el envío se cobra o no
 function envio() {
-  switch (contador) {
-    case 0:
-      alert("Selecciona al menos un libro antes de continuar.");
-      break;
-    default:
-      if (total < 20000) {
-        alert("El envío cuesta $100.");
-        total += 100;
-        let precioFinal = document.getElementById("valor_total");
-        precioFinal.innerHTML = "$" + total;
-        document.getElementById("botonEnvio").disabled = true;
-        document.getElementById("botonPagar").disabled = false;
-      } else {
-        alert("El envío es gratis.");
-        document.getElementById("botonEnvio").disabled = true;
-        document.getElementById("botonPagar").disabled = false;
-      }
+  if (contador === 0) {
+    alert("Selecciona al menos un libro antes de continuar.");
+  } else {
+    document.getElementById("productContainer").style.display = "none";
+    document.getElementById("pago").style.display = "block";
+    if (total < 20000) {
+      let valorEnvio = document.getElementById("valorEnvio");
+      valorEnvio.innerHTML = "El envío cuesta $100.";
+      total += 100;
+      let precioFinal = document.getElementById("valor_total");
+      precioFinal.innerHTML = "$" + total;
+      document.getElementById("botonEnvio").disabled = true;
+      document.getElementById("botonPagar").disabled = false;
+    } else {
+      let valorEnvio = document.getElementById("valorEnvio");
+      valorEnvio.innerHTML = "El envío es gratis.";
+      document.getElementById("botonEnvio").disabled = true;
+      document.getElementById("botonPagar").disabled = false;
+    }
   }
 }
 
 //funcion con los alerts de pago simulados
-function pagar() {
-  const metodoPago = prompt(
-    "selecciona un metodo de pago:  1.credito  2. debito "
-  );
-  switch (metodoPago) {
-    case "1":
-      const cuotas = prompt(
-        "selecciona cantidad de cuotas:",
-        "1 cuota, 3 cuotas, 6 cuotas"
-      );
-      switch (cuotas) {
-        case "1 cuota":
-          alert("Una cuota de $" + total);
-          alert(
-            "su compra llegará en los proximos 10 días hábiles. Muchas gracias por comprar con nosotros!"
-          );
-          location.reload();
-          break;
-        case "3 cuotas":
-          alert("Tres cuotas $" + total / 3);
-          alert(
-            "su compra llegará en los proximos 10 días hábiles. Muchas gracias por comprar con nosotros!"
-          );
-          location.reload();
-          break;
-        case "6 cuotas":
-          alert("Seis cuotas $" + total / 6);
-          alert(
-            "su compra llegará en los proximos 10 días hábiles. Muchas gracias por comprar con nosotros!"
-          );
-          location.reload();
-          break;
-        default:
-          alert("seleccione una opcion valida");
-      }
+function pagar(boton) {
+  switch (boton) {
+    case 1:
+      botonCredito.style.backgroundColor = "black";
+      document.getElementById("cuotas").style.display = "block";
+      dividir();
       break;
-    case "2":
-      alert(
-        "su compra llegará en los proximos 10 días hábiles. Muchas gracias por comprar con nosotros!"
-      );
-      location.reload();
+    case 2:
+      document.getElementById("pago").style.display = "none";
+      document.getElementById("llegara").style.display = "block";
+      break;
+    default:
+      alert("selecciona un metodo de pago");
+  }
+}
+
+function dividir(boton) {
+  switch (boton) {
+    case "1":
+      valorCuota = document.getElementById("valorCuota");
+      valorCuota.innerHTML = "Una cuota de $" + total;
+      document.getElementById("pagar").style.display = "block";
+      break;
+    case "3":
+      valorCuota = document.getElementById("valorCuota");
+      valorCuota.innerHTML = "Tres cuotas de $" + total / 3;
+      document.getElementById("pagar").style.display = "block";
+      break;
+    case "6":
+      valorCuota = document.getElementById("valorCuota");
+      valorCuota.innerHTML = "Seis cuotas de $" + total / 6;
+      document.getElementById("pagar").style.display = "block";
+      break;
+    default:
       break;
   }
+}
+
+function terminar() {
+  document.getElementById("pago").style.display = "none";
+  document.getElementById("llegara").style.display = "block";
 }
 
 //funcion que filtra los productos por precio maximo, reemplaza el conteiner de libros por los resultados
@@ -188,4 +239,14 @@ function mostrarResultados(productos) {
   `;
     resultadosDiv.appendChild(productoDiv);
   });
+}
+
+function borrarCarrito() {
+  localStorage.clear(); // Borra todo el contenido del Local Storage
+  location.reload(); // Recarga la página
+}
+
+function borrarSesion() {
+  localStorage.clear(); // Borra todo el contenido del Local Storage
+  location.reload(); // Recarga la página
 }
