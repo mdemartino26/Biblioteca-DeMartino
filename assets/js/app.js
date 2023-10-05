@@ -147,12 +147,10 @@ function envio() {
       let precioFinal = document.getElementById("valor_total");
       precioFinal.innerHTML = "$" + total;
       document.getElementById("botonEnvio").disabled = true;
-      document.getElementById("botonPagar").disabled = false;
     } else {
       let valorEnvio = document.getElementById("valorEnvio");
       valorEnvio.innerHTML = "El envío es gratis.";
       document.getElementById("botonEnvio").disabled = true;
-      document.getElementById("botonPagar").disabled = false;
     }
   }
 }

@@ -99,6 +99,20 @@ h1 {
   font-size: 1.5rem;
 }
 
+#valorEnvio {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+#metodosPago {
+  margin-top: 2em;
+  min-height: 40vh;
+}
+
+#cuotas {
+  margin-top: 1em;
+}
+
 #pago {
   display: none;
 }
@@ -113,6 +127,11 @@ h1 {
 
 #pagar {
   display: none;
+}
+
+#botonAtras {
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 footer {
