@@ -30,6 +30,7 @@ header {
 main {
   width: 90%;
   margin: 0 auto;
+  min-height: 75vh;
 }
 
 h1 {
@@ -46,7 +47,7 @@ h1 {
 
 .container {
   display: flex;
-  align-content: space-between;
+  justify-content: space-between;
 }
 
 #cardsLibros {
@@ -60,10 +61,11 @@ h1 {
 }
 
 #col-peque {
-  width: 25%;
+  max-width: 25%;
   background-color: #faedcd;
   padding-top: 4%;
   margin-left: 1%;
+  min-height: 75vh;
 }
 
 .resultadosInicial {

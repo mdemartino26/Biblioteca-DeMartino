@@ -28,6 +28,9 @@ botonVolver.addEventListener("click", borrarSesion);
 const botonPagar = document.querySelector("#pagar");
 botonPagar.addEventListener("click", terminar);
 
+const botonAtras = document.querySelector("#botonAtras");
+botonAtras.addEventListener("click", irAtras);
+
 //Array de libros (objetos)
 const libros = [
   {
@@ -239,6 +242,10 @@ function mostrarResultados(productos) {
   `;
     resultadosDiv.appendChild(productoDiv);
   });
+}
+
+function irAtras() {
+  location.reload();
 }
 
 function borrarCarrito() {
