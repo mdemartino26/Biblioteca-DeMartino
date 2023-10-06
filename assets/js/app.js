@@ -9,7 +9,7 @@ const botonBorrar = document.querySelector("#botonBorrar");
 botonBorrar.addEventListener("click", borrarCarrito);
 
 const metodoCredito = document.querySelector("#botonCredito");
-metodoCredito.addEventListener("click", () => pagar(1));
+metodoCredito.addEventListener("click", () => pagar(1)); //Arrow para que no se ejecute al iniciar la ventana
 const metodoDebito = document.querySelector("#botonDebito");
 metodoDebito.addEventListener("click", () => pagar(2));
 
