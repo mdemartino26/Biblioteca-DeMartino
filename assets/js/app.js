@@ -160,7 +160,7 @@ function pagar(boton) {
   switch (boton) {
     case 1:
       botonCredito.style.backgroundColor = "black";
-      document.getElementById("cuotas").style.display = "block";
+      document.getElementById("cuotas").style.display = "flex";
       dividir();
       break;
     case 2:
