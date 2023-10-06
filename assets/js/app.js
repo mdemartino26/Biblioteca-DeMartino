@@ -3,15 +3,13 @@ let total = parseInt(localStorage.getItem("total")) || 0;
 
 const botonEnvio = document.querySelector("#botonEnvio");
 botonEnvio.addEventListener("click", envio);
-/* const botonPagar = document.querySelector("#botonPagar");
-botonPagar.addEventListener("click", pagar); */
 const botonFiltrar = document.querySelector("#botonFiltrar");
 botonFiltrar.addEventListener("click", filtrarProductos);
 const botonBorrar = document.querySelector("#botonBorrar");
 botonBorrar.addEventListener("click", borrarCarrito);
+
 const metodoCredito = document.querySelector("#botonCredito");
 metodoCredito.addEventListener("click", () => pagar(1));
-
 const metodoDebito = document.querySelector("#botonDebito");
 metodoDebito.addEventListener("click", () => pagar(2));
 
@@ -172,6 +170,7 @@ function pagar(boton) {
   }
 }
 
+//Switch de las cuotas disponibles
 function dividir(boton) {
   switch (boton) {
     case "1":
@@ -194,6 +193,7 @@ function dividir(boton) {
   }
 }
 
+//deja la pantalla de confirmacion y los botones finales
 function terminar() {
   document.getElementById("pago").style.display = "none";
   document.getElementById("llegara").style.display = "block";
@@ -225,7 +225,7 @@ function mostrarResultados(productos) {
     return;
   }
 
-  //
+  //pone la info para cada producto
   productos.forEach((producto) => {
     const productoDiv = document.createElement("div");
     productoDiv.classList.add("card", "mb-2");
@@ -242,16 +242,21 @@ function mostrarResultados(productos) {
   });
 }
 
+//Recarga el inicio
 function irAtras() {
   location.reload();
-}
-
-function borrarCarrito() {
-  localStorage.clear(); // Borra todo el contenido del Local Storage
-  location.reload(); // Recarga la página
 }
 
 function borrarSesion() {
   localStorage.clear(); // Borra todo el contenido del Local Storage
   location.reload(); // Recarga la página
+}
+
+function borrarCarrito() {
+  const confirmacion = confirm("¿Está seguro que desea borrar el carrito?");
+
+  if (confirmacion) {
+    localStorage.clear(); // Borra todo el contenido del Local Storage
+    location.reload(); // Recarga la página
+  }
 }
