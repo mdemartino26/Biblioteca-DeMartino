@@ -1,10 +1,13 @@
+* {
+  font-family: "Roboto", sans-serif;
+}
+
 body {
   min-height: 100vh;
 }
 
 header {
-  background-color: #011627;
-  color: white;
+  color: #91219b;
 }
 
 #nextTo {
@@ -16,15 +19,51 @@ header {
   justify-content: space-between;
 }
 
+#formFiltro {
+  width: 50%;
+}
+
 .form-inline {
   display: flex;
 }
 
-#banner-pedidos {
-  width: 100%;
+#precioMax {
+  margin-right: 1em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#botonFiltrar {
+  border: #91219b 1px solid;
+  color: #91219b;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#botonFiltrar:hover {
+  background: #91219b;
   color: white;
-  background-color: #e76f51;
-  text-align: center;
+}
+
+.card {
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+#banner-pedidos {
+  color: white;
+  background-color: #91219b;
+}
+
+#banner-pedidos p {
+  position: relative;
+  animation: slideleft 40s infinite;
+  inline-size: max-content;
+}
+
+@keyframes slideleft {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 70%;
+  }
 }
 
 main {
@@ -147,8 +186,9 @@ h1 {
 }
 
 footer {
-  background-color: black;
+  background-color: #91219b;
   color: white;
   height: 5vh;
   text-align: center;
+  font-weight: 600;
 }
