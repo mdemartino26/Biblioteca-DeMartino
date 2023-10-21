@@ -134,7 +134,12 @@ mostrarProductos();
 //funcion que calcula si el envío se cobra o no
 function envio() {
   if (contador === 0) {
-    alert("Selecciona al menos un libro antes de continuar.");
+    Swal.fire({
+      title: "Selecciona un libro",
+      text: "Selecciona al menos un libro antes de continuar",
+      icon: "warning",
+      confirmButtonText: "Cool",
+    });
   } else {
     document.getElementById("productContainer").style.display = "none";
     document.getElementById("pago").style.display = "block";
@@ -163,10 +168,21 @@ function pagar(boton) {
       break;
     case 2:
       document.getElementById("pago").style.display = "none";
-      document.getElementById("llegara").style.display = "block";
+      Swal.fire({
+        title: "Su compra fue realizada con éxito",
+        text: "Llegará dentro de los próximos 10 días hábiles",
+        icon: "success",
+        confirmButtonText: "Cool",
+      });
       break;
     default:
-      alert("selecciona un metodo de pago");
+      Swal.fire({
+        title: "Selecciona un método de pago",
+        text: "Selecciona un método de pago para continuar",
+        icon: "warning",
+        showConfirmButton: false,
+        timer: 2000,
+      });
   }
 }
 
@@ -196,7 +212,19 @@ function dividir(boton) {
 //deja la pantalla de confirmacion y los botones finales
 function terminar() {
   document.getElementById("pago").style.display = "none";
-  document.getElementById("llegara").style.display = "block";
+  Swal.fire({
+    title: "Su compra fue realizada con éxito",
+    text: "Llegará dentro de los próximos 10 días hábiles",
+    icon: "success",
+    showConfirmButton: false,
+    timer: 2000,
+  });
+  setTimeout(reinicio, 2000); //Espera al alert para hacer la funcion de reinicio
+}
+
+function reinicio() {
+  localStorage.clear(); // Borra todo el contenido del Local Storage
+  location.reload(); // Recarga la página
 }
 
 //funcion que filtra los productos por precio maximo, reemplaza el conteiner de libros por los resultados
