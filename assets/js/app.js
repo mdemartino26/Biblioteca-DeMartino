@@ -1,5 +1,5 @@
-let contador = parseInt(localStorage.getItem("contador")) || 0;
-let total = parseInt(localStorage.getItem("total")) || 0;
+let contador = JSON.parse(localStorage.getItem("contador")) || 0;
+let total = JSON.parse(localStorage.getItem("total")) || 0;
 
 const botonEnvio = document.querySelector("#botonEnvio");
 botonEnvio.addEventListener("click", envio);
@@ -29,6 +29,56 @@ botonPagar.addEventListener("click", terminar);
 const botonAtras = document.querySelector("#botonAtras");
 botonAtras.addEventListener("click", irAtras);
 
+/* // Constructor de producto
+function Product(nombre, precio, imagen) {
+  this.nombre = nombre;
+  this.precio = precio;
+  this.imagen = imagen;
+
+  this.render = function () {
+    const productoDiv = document.createElement("div");
+    productoDiv.classList.add("producto");
+
+    const imagen = document.createElement("img");
+    imagen.src = this.imagen;
+
+    const nombre = document.createElement("h2");
+    nombre.textContent = this.nombre;
+
+    const precio = document.createElement("p");
+    precio.textContent = "$" + this.precio;
+
+    productoDiv.appendChild(imagen);
+    productoDiv.appendChild(nombre);
+    productoDiv.appendChild(precio);
+
+    document.getElementById("productos-container").appendChild(productoDiv);
+  };
+} */
+
+// Realizar solicitud a la API
+fetch("https://fakestoreapi.com/products")
+  .then((response) => response.json())
+  .then((data) => {
+    const resultadosDiv = document.getElementById("productos-container");
+    data.forEach((item) => {
+      const productoDiv = document.createElement("div");
+      productoDiv.classList.add("card", "mb-2");
+      productoDiv.innerHTML = `
+                        <img src="${item.image}" class="card-img-top" alt="${item.title}">
+                        <div class="card-body">
+                            <h5 class="card-title">${item.title}</h5>
+                            <p class="card-text">Precio: $${item.price}</p>
+                            <button class="btn btn-primary" onclick="comprarProducto('${item.title}', ${item.price})">Comprar</button>
+                        </div>
+                    `;
+      resultadosDiv.appendChild(productoDiv);
+    });
+  })
+  .catch((error) => {
+    console.error("Error al obtener los datos: " + error);
+  });
+/* 
 //Array de libros (objetos)
 const libros = [
   {
@@ -61,7 +111,7 @@ const libros = [
     precio: "20000",
     foto: "assets/img/libros.jpeg",
   },
-];
+]; */
 
 //Muestra al abrir la ventana lo que hay en el localStorage
 window.onload = function () {
@@ -71,7 +121,7 @@ window.onload = function () {
   precioFinal.innerHTML = "$" + total;
 };
 
-// Función para crear las tarjetas de los libros
+/* // Función para crear las tarjetas de los libros
 function createCard(product) {
   const card = document.createElement("div");
   card.className = "col-md-4 mt-4";
@@ -100,7 +150,7 @@ function mostrarProductos() {
     const card = createCard(producto);
     productContainer.appendChild(card);
   }
-}
+} */
 
 //Funcion de compra
 function comprarProducto(productName, productPrecio) {
@@ -150,10 +200,10 @@ function envio() {
   } else {
     document.getElementById("productContainer").style.display = "none";
     document.getElementById("pago").style.display = "block";
-    if (total < 20000) {
+    if (total < 300) {
       let valorEnvio = document.getElementById("valorEnvio");
       valorEnvio.innerHTML = "El envío cuesta $100.";
-      total += 100;
+      total += 50;
       let precioFinal = document.getElementById("valor_total");
       precioFinal.innerHTML = "$" + total;
       document.getElementById("botonEnvio").disabled = true;
@@ -179,8 +229,10 @@ function pagar(boton) {
         title: "Su compra fue realizada con éxito",
         text: "Llegará dentro de los próximos 10 días hábiles",
         icon: "success",
-        confirmButtonText: "Cool",
+        showConfirmButton: false,
+        timer: 2000,
       });
+      setTimeout(reinicio, 2000);
       break;
     default:
       Swal.fire({
