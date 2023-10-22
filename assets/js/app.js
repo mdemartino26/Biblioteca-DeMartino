@@ -105,6 +105,13 @@ function mostrarProductos() {
 //Funcion de compra
 function comprarProducto(productName, productPrecio) {
   contador++;
+  Toastify({
+    text: `"${productName}" fue agregado al carrito`,
+    className: "info",
+    style: {
+      background: "linear-gradient(to right, #00b09b, #96c93d)",
+    },
+  }).showToast();
   let carrito = document.getElementById("libros_seleccionados");
   carrito.innerHTML = contador;
 
@@ -275,16 +282,25 @@ function irAtras() {
   location.reload();
 }
 
+function borrarCarrito() {
+  Swal.fire({
+    title: "¿Está seguro que desea borrar el carrito?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    cancelButtonText: "No",
+    confirmButtonText: "Si, borrar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      localStorage.clear(); // Borra todo el contenido del Local Storage
+      Swal.fire("Eliminado!", "tu carrito está vacío");
+      setTimeout(borrarSesion, 1000);
+    }
+  });
+}
+
 function borrarSesion() {
   localStorage.clear(); // Borra todo el contenido del Local Storage
   location.reload(); // Recarga la página
-}
-
-function borrarCarrito() {
-  const confirmacion = confirm("¿Está seguro que desea borrar el carrito?");
-
-  if (confirmacion) {
-    localStorage.clear(); // Borra todo el contenido del Local Storage
-    location.reload(); // Recarga la página
-  }
 }
