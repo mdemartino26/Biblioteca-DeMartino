@@ -139,7 +139,7 @@ function pagar(boton) {
         showConfirmButton: false,
         timer: 2000,
       });
-      setTimeout(reinicio, 2000);
+      setTimeout(borrarSesion, 2000);
       break;
     default:
       Swal.fire({
