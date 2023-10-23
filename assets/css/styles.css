@@ -145,8 +145,7 @@ h1 {
   display: none;
 }
 
-.resultados {
-  display: flex;
+#verResultados {
   width: 70%;
   margin: 0 auto;
   justify-content: space-evenly;

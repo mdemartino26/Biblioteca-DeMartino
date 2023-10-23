@@ -1,6 +1,8 @@
 let contador = JSON.parse(localStorage.getItem("contador")) || 0;
 let total = JSON.parse(localStorage.getItem("total")) || 0;
 
+const arrayProductos = [];
+
 const botonEnvio = document.querySelector("#botonEnvio");
 botonEnvio.addEventListener("click", envio);
 const botonFiltrar = document.querySelector("#botonFiltrar");
@@ -60,6 +62,8 @@ function Product(nombre, precio, imagen) {
 fetch("https://fakestoreapi.com/products")
   .then((response) => response.json())
   .then((data) => {
+    arrayProductos.push(...data);
+    console.log(arrayProductos);
     const resultadosDiv = document.getElementById("productos-container");
     data.forEach((item) => {
       const productoDiv = document.createElement("div");
@@ -185,8 +189,8 @@ function comprarProducto(productName, productPrecio) {
   );
 }
 
-// Mostrar las tarjetas en la carga inicial
-mostrarProductos();
+/* // Mostrar las tarjetas en la carga inicial
+mostrarProductos(); */
 
 //funcion que calcula si el envío se cobra o no
 function envio() {
@@ -199,6 +203,7 @@ function envio() {
     });
   } else {
     document.getElementById("productContainer").style.display = "none";
+    document.getElementById("verResultados").style.display = "none";
     document.getElementById("pago").style.display = "block";
     if (total < 300) {
       let valorEnvio = document.getElementById("valorEnvio");
@@ -285,19 +290,35 @@ function reinicio() {
   localStorage.clear(); // Borra todo el contenido del Local Storage
   location.reload(); // Recarga la página
 }
-
-//funcion que filtra los productos por precio maximo, reemplaza el conteiner de libros por los resultados
+/* 
+//funcion que filtra los productos por precio maximo, reemplaza el container de libros por los resultados
 function filtrarProductos() {
-  document.getElementById("verResultados").className = "resultados";
+  /* document.getElementById("verResultados").className = "resultados";
 
   const precioMax =
-    parseFloat(document.getElementById("precioMax").value) || Number.MAX_VALUE; //convierte el valor a decimal o toma el valor maximo posible
-  const productosFiltrados = libros.filter((producto) => {
-    const precioProducto = producto.precio; //Busca el precio del producto y lo crea en una const
-    return precioProducto <= precioMax; // devuelve el producto que sea menos al precio max
-  });
+    parseFloat(document.getElementById("precioMax").value) || Number.MAX_VALUE;
+  // Filtrar productos de la API por precio máximo
+  const productosFiltrados = arrayProductos.filter(
+    (item) => item.price <= precioMax
+  );
 
-  mostrarResultados(productosFiltrados);
+  mostrarResultados(productosFiltrados); 
+  const precioMax =
+    parseFloat(document.getElementById("precioMax").value) || Number.MAX_VALUE;
+
+  // Realizar solicitud a la API de FakeStore
+  fetch("https://fakestoreapi.com/products")
+    .then((response) => response.json())
+    .then((data) => {
+      // Filtrar productos de la API por precio máximo
+      const productosFiltrados = data.filter((item) => item.price <= precioMax);
+
+      // Mostrar los productos filtrados en la página
+      mostrarResultados(productosFiltrados);
+    })
+    .catch((error) => {
+      console.error("Error al obtener los datos: " + error);
+    });
 }
 
 //funcion que muestra los resultados en el container
@@ -305,12 +326,66 @@ function mostrarResultados(productos) {
   const resultadosDiv = document.getElementById("verResultados");
   resultadosDiv.innerHTML = "";
   document.getElementById("productContainer").style.display = "none";
-
-  //si se ingresa un valor y no encuentra productos que valgan menos que el precio ingresado
+ */
+/*   //si se ingresa un valor y no encuentra productos que valgan menos que el precio ingresado
   if (productos.length === 0) {
     resultadosDiv.innerHTML = "<p>No se encontró un libro más barato.</p>";
     return;
+  } */
+
+function filtrarProductos() {
+  const precioMax =
+    parseFloat(document.getElementById("precioMax").value) || Number.MAX_VALUE;
+
+  // Realizar solicitud a la API de FakeStore
+  fetch("https://fakestoreapi.com/products")
+    .then((response) => response.json())
+    .then((data) => {
+      // Filtrar productos de la API por precio máximo
+      const productosFiltrados = data.filter((item) => item.price <= precioMax);
+      console.log(productosFiltrados);
+
+      // Mostrar los productos filtrados en la página
+      mostrarResultados(productosFiltrados);
+    })
+    .catch((error) => {
+      console.error("Error al obtener los datos: " + error);
+    });
+}
+
+//función que muestra los resultados en el container
+function mostrarResultados(productos) {
+  const resultadosDiv = document.getElementById("verResultados");
+  document.getElementById("verResultados").style.display = "flex";
+  resultadosDiv.innerHTML = "";
+  // Mostrar los productos filtrados
+  productos.forEach((item) => {
+    const productoDiv = document.createElement("div");
+    productoDiv.classList.add("card", "mb-2");
+    productoDiv.innerHTML = `
+        <img src="${item.image}" class="card-img-top" alt="${item.title}">
+        <div class="card-body">
+          <h5 class="card-title">${item.title}</h5>
+          <p class="card-text">Precio: $${item.price}</p>
+          <button class="btn btn-primary" onclick="comprarProducto('${item.title}', ${item.price})">Comprar</button>
+        </div>
+      `;
+    resultadosDiv.appendChild(productoDiv);
+  });
+  document.getElementById("productContainer").style.display = "none";
+
+  // Si no se encuentran productos que cumplan el filtro
+  if (productos.length === 0) {
+    resultadosDiv.innerHTML =
+      "<p>No se encontraron productos que cumplan el filtro.</p>";
+    return;
   }
+}
+
+// ...
+
+/*   // Agregar el evento click para el botón de filtrar
+  botonFiltrar.addEventListener("click", filtrarProductos);
 
   //pone la info para cada producto
   productos.forEach((producto) => {
@@ -326,8 +401,7 @@ function mostrarResultados(productos) {
     </div>
   `;
     resultadosDiv.appendChild(productoDiv);
-  });
-}
+  }); */
 
 //Recarga el inicio
 function irAtras() {
