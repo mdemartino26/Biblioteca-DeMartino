@@ -14,14 +14,14 @@
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous"
     />
-    <title>Biblioteca</title>
+    <title>CoShop</title>
   </head>
   <body>
     <!--//////////////////               HEADER                   //////////////////-->
     <header>
       <div id = "nextTo" >
       <div id="cabeza" class="my-2 my-lg-0">
-        <h2>Biblioteca</h2>
+        <h2>CoShop</h2>
       </div>
 
       <div id="formFiltro">
@@ -40,141 +40,63 @@
     <!--//////////////////               MAIN                   //////////////////-->
     <main>
 
-      
-
-
-        
-       <!--  <div class="container" id="container">
-            <div id="verResultados" class="mt-4 resultadosInicial"></div>
-        <div class="row" id="productContainer">  
-        
-      
-          <h1>Populares</h1>
-          <div class="col" id="columna">
-          </div>
-
-
-          
-        </div> -->
         <div class="container" id="container">
           <div id="verResultados" class="col mt-4 resultadosInicial"></div>
           <div class="row" id="productContainer">  
-          <h1>Populares</h1>
+            <h1>Nuestros productos</h1>
 
-          <div class="col" id="productos-container">
-          </div>
-
-
-          
+            <div class="col" id="productos-container">
+            <!-- Acá se muestran los productos -->     
+            </div>
         </div>
-        <!-- <div id="productos-container">
-           Aquí se mostrarán los productos 
-      </div> -->
+    
   
   
-        
         <div class="col" id="pago">
-          <button id="botonAtras"
-          class="btn btn-outline-success"> Volver </button>
+          <button id="botonAtras" class="btn btn-outline-success"> Volver </button>
+
           <div id="valorEnvio"></div>
 
-          
           <h3>Selecciona un método de pago:</h3>
           <div id="metodosPago">
-          <button
-          id="botonCredito"
-          class="btn btn-outline-success btnPago"
-        >
-          Credito
-        </button>
-        
-
-        <button
-        id="botonDebito"
-        class="btn btn-outline-success btnPago"
-      >
-        Debito
-      </button>
-    </div>
+            <button id="botonCredito" class="btn btn-outline-success btnPago"> Crédito </button>
+            <button id="botonDebito" class="btn btn-outline-success btnPago"> Débito </button>
+          </div>
       
           <h4>Seleccione la cantidad de cuotas:</h4>
           <div id="cuotas">
-          <button
-          id="botonUna"
-          class="btn btn-outline-success btnCuotas"
-        >
-          1 Cuota
-        </button>
-        <button
-          id="botonTres"
-          class="btn btn-outline-success btnCuotas"
-        >
-          3 Cuotas
-        </button>
-        <button
-          id="botonSeis"
-          class="btn btn-outline-success btnCuotas"
-        >
-          6 Cuotas
-        </button>
-      </div>
-      <div id="valorCuota">
-      </div>
-      <button  id="pagar"
-       class="btn btn-outline-success">Pagar</button> 
- 
-  </div>
-      <div id="llegara">
-        <p>Su compra llegará dentro de los próximos 10 días habiles. Muchas gracias por comprar con nosotros!</p>
-        <button
-        id="botonVolver"
-        class="btn btn-outline-success"
-      >
-        Volver al inicio
-      </button>
+            <button id="botonUna" class="btn btn-outline-success btnCuotas"> 1 Cuota </button>
+            <button id="botonTres" class="btn btn-outline-success btnCuotas"> 3 Cuotas </button>
+            <button id="botonSeis" class="btn btn-outline-success btnCuotas"> 6 Cuotas </button>
+          </div>
 
-      <button
-        id="botonVolver"
-        class="btn btn-outline-success"
-        disabled
-      >
-        Boton de arrepentimiento
-      </button>
-      </div>
-      
-        
-    
+          <div id="valorCuota"></div>
+          
+          <button  id="pagar" class="btn btn-outline-success">Pagar</button> 
+        </div>
 
-          <div class="col" id="col-peque">
-            <section id="seleccionados">
-              <div class="selecc">
-                <h3>Carrito:</h3>
-                <p id="libros_seleccionados" class="valores"> </p>
-              </div>
-              <div class="selecc">
-                <h3>Total:</h3>
-                <p id="valor_total" class="valores"></p>
+
+        <div class="col" id="col-peque">
+          <section id="seleccionados">
+            <div class="selecc">
+
+              <h3>Carrito:</h3>
+              <p id="productos_seleccionados" class="valores"> </p>
               </div>
 
-        
-            
+            <div class="selecc">
+              <h3>Total:</h3>
+              <p id="valor_total" class="valores"></p>
+              </div>
+
             <div>
-              <button
-                id="botonEnvio"
-                class="btn btn-outline-success"
-              >
-                Calcular envío
-              </button>
+              <button id="botonEnvio" class="btn btn-outline-success"> Calcular envío </button>
             </div>
+
             <div>
-              
-              <button
-                id="botonBorrar"
-                class="btn btn-outline-danger"
-              >
-                Borrar Carrito
-              </button>
+              <button id="botonBorrar" class="btn btn-outline-danger"> Borrar Carrito </button>
             </div>
+
           </div>
           </div>
           </div>
@@ -183,7 +105,7 @@
     </main>
 
     <!--//////////////////               FOOTER                   //////////////////-->
-    <footer>biblioteca</footer>
+    <footer>CoShop</footer>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="assets/js/app.js"></script>

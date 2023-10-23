@@ -22,41 +22,11 @@ tresCuotas.addEventListener("click", () => dividir("3"));
 const seisCuotas = document.querySelector("#botonSeis");
 seisCuotas.addEventListener("click", () => dividir("6"));
 
-const botonVolver = document.querySelector("#botonVolver");
-botonVolver.addEventListener("click", borrarSesion);
-
 const botonPagar = document.querySelector("#pagar");
 botonPagar.addEventListener("click", terminar);
 
 const botonAtras = document.querySelector("#botonAtras");
 botonAtras.addEventListener("click", irAtras);
-
-/* // Constructor de producto
-function Product(nombre, precio, imagen) {
-  this.nombre = nombre;
-  this.precio = precio;
-  this.imagen = imagen;
-
-  this.render = function () {
-    const productoDiv = document.createElement("div");
-    productoDiv.classList.add("producto");
-
-    const imagen = document.createElement("img");
-    imagen.src = this.imagen;
-
-    const nombre = document.createElement("h2");
-    nombre.textContent = this.nombre;
-
-    const precio = document.createElement("p");
-    precio.textContent = "$" + this.precio;
-
-    productoDiv.appendChild(imagen);
-    productoDiv.appendChild(nombre);
-    productoDiv.appendChild(precio);
-
-    document.getElementById("productos-container").appendChild(productoDiv);
-  };
-} */
 
 // Realizar solicitud a la API
 fetch("https://fakestoreapi.com/products")
@@ -82,79 +52,14 @@ fetch("https://fakestoreapi.com/products")
   .catch((error) => {
     console.error("Error al obtener los datos: " + error);
   });
-/* 
-//Array de libros (objetos)
-const libros = [
-  {
-    nombre: "Mujercitas",
-    precio: 10000,
-    foto: "assets/img/libros.jpeg",
-  },
-  {
-    nombre: "Hamlet",
-    precio: 11000,
-    foto: "assets/img/libros.jpeg",
-  },
-  {
-    nombre: "Yo, el gato",
-    precio: 10500,
-    foto: "assets/img/libros.jpeg",
-  },
-  {
-    nombre: "Pet Sematary",
-    precio: 9000,
-    foto: "assets/img/libros.jpeg",
-  },
-  {
-    nombre: "Universo Marvel",
-    precio: 15000,
-    foto: "assets/img/libros.jpeg",
-  },
-  {
-    nombre: "Don Quojite",
-    precio: "20000",
-    foto: "assets/img/libros.jpeg",
-  },
-]; */
 
 //Muestra al abrir la ventana lo que hay en el localStorage
 window.onload = function () {
-  let carrito = document.querySelector("#libros_seleccionados");
+  let carrito = document.querySelector("#productos_seleccionados");
   carrito.innerHTML = contador;
   let precioFinal = document.querySelector("#valor_total");
   precioFinal.innerHTML = "$" + total;
 };
-
-/* // Función para crear las tarjetas de los libros
-function createCard(product) {
-  const card = document.createElement("div");
-  card.className = "col-md-4 mt-4";
-
-  //crea la card
-  card.innerHTML = `
-    <div class="card">
-      <img src="${product.foto}" class="card-img-top" alt="..."> 
-      <div class="card-body">
-        <h5 class="card-title">${product.nombre}</h5>
-        <p class="card-text">Precio: ${product.precio}</p>
-        <button class="btn btn-primary" onclick="comprarProducto('${product.nombre}', ${product.precio})">Comprar</button>
-      </div>
-    </div>
-  `;
-
-  return card;
-}
-
-// Función para agregar las tarjetas al contenedor en el HTML
-function mostrarProductos() {
-  const productContainer = document.getElementById("productContainer");
-  productContainer.innerHTML = "";
-
-  for (const producto of libros) {
-    const card = createCard(producto);
-    productContainer.appendChild(card);
-  }
-} */
 
 //Funcion de compra
 function comprarProducto(productName, productPrecio) {
@@ -163,10 +68,10 @@ function comprarProducto(productName, productPrecio) {
     text: `"${productName}" fue agregado al carrito`,
     className: "info",
     style: {
-      background: "linear-gradient(to right, #00b09b, #96c93d)",
+      background: "linear-gradient(to right, #CA7DF9, #E83151)",
     },
   }).showToast();
-  let carrito = document.getElementById("libros_seleccionados");
+  let carrito = document.getElementById("productos_seleccionados");
   carrito.innerHTML = contador;
 
   total = total + productPrecio;
@@ -189,9 +94,6 @@ function comprarProducto(productName, productPrecio) {
   );
 }
 
-/* // Mostrar las tarjetas en la carga inicial
-mostrarProductos(); */
-
 //funcion que calcula si el envío se cobra o no
 function envio() {
   if (contador === 0) {
@@ -207,7 +109,7 @@ function envio() {
     document.getElementById("pago").style.display = "block";
     if (total < 300) {
       let valorEnvio = document.getElementById("valorEnvio");
-      valorEnvio.innerHTML = "El envío cuesta $100.";
+      valorEnvio.innerHTML = "El envío cuesta $50.";
       total += 50;
       let precioFinal = document.getElementById("valor_total");
       precioFinal.innerHTML = "$" + total;
@@ -283,56 +185,10 @@ function terminar() {
     showConfirmButton: false,
     timer: 2000,
   });
-  setTimeout(reinicio, 2000); //Espera al alert para hacer la funcion de reinicio
+  setTimeout(borrarSesion, 2000); //Espera al alert para hacer la funcion de reinicio
 }
 
-function reinicio() {
-  localStorage.clear(); // Borra todo el contenido del Local Storage
-  location.reload(); // Recarga la página
-}
-/* 
-//funcion que filtra los productos por precio maximo, reemplaza el container de libros por los resultados
-function filtrarProductos() {
-  /* document.getElementById("verResultados").className = "resultados";
-
-  const precioMax =
-    parseFloat(document.getElementById("precioMax").value) || Number.MAX_VALUE;
-  // Filtrar productos de la API por precio máximo
-  const productosFiltrados = arrayProductos.filter(
-    (item) => item.price <= precioMax
-  );
-
-  mostrarResultados(productosFiltrados); 
-  const precioMax =
-    parseFloat(document.getElementById("precioMax").value) || Number.MAX_VALUE;
-
-  // Realizar solicitud a la API de FakeStore
-  fetch("https://fakestoreapi.com/products")
-    .then((response) => response.json())
-    .then((data) => {
-      // Filtrar productos de la API por precio máximo
-      const productosFiltrados = data.filter((item) => item.price <= precioMax);
-
-      // Mostrar los productos filtrados en la página
-      mostrarResultados(productosFiltrados);
-    })
-    .catch((error) => {
-      console.error("Error al obtener los datos: " + error);
-    });
-}
-
-//funcion que muestra los resultados en el container
-function mostrarResultados(productos) {
-  const resultadosDiv = document.getElementById("verResultados");
-  resultadosDiv.innerHTML = "";
-  document.getElementById("productContainer").style.display = "none";
- */
-/*   //si se ingresa un valor y no encuentra productos que valgan menos que el precio ingresado
-  if (productos.length === 0) {
-    resultadosDiv.innerHTML = "<p>No se encontró un libro más barato.</p>";
-    return;
-  } */
-
+//Funcion que filtra los productos, trae los datos de la API y busca segun el criterio (precio máximo)
 function filtrarProductos() {
   const precioMax =
     parseFloat(document.getElementById("precioMax").value) || Number.MAX_VALUE;
@@ -358,6 +214,7 @@ function mostrarResultados(productos) {
   const resultadosDiv = document.getElementById("verResultados");
   document.getElementById("verResultados").style.display = "flex";
   resultadosDiv.innerHTML = "";
+
   // Mostrar los productos filtrados
   productos.forEach((item) => {
     const productoDiv = document.createElement("div");
@@ -377,37 +234,17 @@ function mostrarResultados(productos) {
   // Si no se encuentran productos que cumplan el filtro
   if (productos.length === 0) {
     resultadosDiv.innerHTML =
-      "<p>No se encontraron productos que cumplan el filtro.</p>";
+      "<p>No se encontraron productos de ese valor.</p>";
     return;
   }
 }
 
-// ...
-
-/*   // Agregar el evento click para el botón de filtrar
-  botonFiltrar.addEventListener("click", filtrarProductos);
-
-  //pone la info para cada producto
-  productos.forEach((producto) => {
-    const productoDiv = document.createElement("div");
-    productoDiv.classList.add("card", "mb-2");
-    productoDiv.innerHTML = `
-      <img src="${producto.foto}" class="card-img-top" alt="..."> 
-      <div class="card-body">
-        <h5 class="card-title">${producto.nombre}</h5>
-        <p class="card-text">Precio: ${producto.precio}</p>
-        <button class="btn btn-primary" onclick="comprarProducto('${producto.nombre}', ${producto.precio})">Comprar</button>
-      </div>
-    </div>
-  `;
-    resultadosDiv.appendChild(productoDiv);
-  }); */
-
-//Recarga el inicio
+//Vuelve del carrito a los productos
 function irAtras() {
   location.reload();
 }
 
+//Funcion que pregunta al usuario si quiere borrar el carrito y en caso de ser "si" lleva a borrarSesion()
 function borrarCarrito() {
   Swal.fire({
     title: "¿Está seguro que desea borrar el carrito?",
@@ -426,6 +263,7 @@ function borrarCarrito() {
   });
 }
 
+//Funcion que borra el localStorage si se selecciona borrar carrito o si se realiza la compra
 function borrarSesion() {
   localStorage.clear(); // Borra todo el contenido del Local Storage
   location.reload(); // Recarga la página
